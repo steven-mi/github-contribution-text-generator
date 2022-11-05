@@ -1,6 +1,8 @@
-# Github Contribution Drawer
+# Github Contribution Text Drawer
 
-Python script for writing text on github contribution chart.
+![](.github/imgs/example.png)
+
+Python script for writing text on Github contribution chart.
 
 ## Requirements
 
@@ -10,18 +12,22 @@ Python script for writing text on github contribution chart.
 
 1. Create repository
 2. Put `main.py` into repository
+3. Modify `TEXT` in `main.py`.
+    - Supported characters: `a, b, c, ..., x, y, z`, `,`(dot), ` `(space)
+    - Maximum number of characters: 10
+4. Modify `MIN_CONTRIB` to the largest number of contribution in 2021 or expected contributions in 2022.
 
-3. Install dependencies
+5. Install dependencies
     ```commandline
     pip install -r requirements.txt
     ```
 
-4. Run script
+6. Run script. This will create git commits locally
     ```commandline
     python main.py
     ```
 
-5. Apply modified git history
+7. Push commits to Github
     ```commandline
     git push origin main
     ```

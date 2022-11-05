@@ -1,206 +1,208 @@
-import numpy as np
 import datetime
 import os
 
+MIN_CONTRIB = 15
+TEXT = "Steven Mi"
+FIRST_CONTRIB_DATE = datetime.datetime(year=2022, month=1, day=2, hour=23, minute=2)
+
 A = [
-    [0, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 1, 0, 0],
-    [1, 0, 0, 0, 1, 0, 0],
-    [0, 1, 1, 1, 1, 1, 1],
+    [0, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, 0, MIN_CONTRIB, 0, 0],
+    [MIN_CONTRIB, 0, 0, 0, MIN_CONTRIB, 0, 0],
+    [0, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
 ]
 
 B = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 1, 0, 0, 1],
-    [1, 0, 0, 1, 0, 0, 1],
-    [0, 1, 1, 0, 1, 1, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, 0, MIN_CONTRIB],
+    [0, MIN_CONTRIB, MIN_CONTRIB, 0, MIN_CONTRIB, MIN_CONTRIB, 0],
 ]
 
 C = [
-    [0, 1, 1, 1, 1, 1, 0],
-    [1, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 1],
-    [0, 1, 0, 0, 0, 1, 0],
+    [0, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [0, MIN_CONTRIB, 0, 0, 0, MIN_CONTRIB, 0],
 ]
 
 D = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 1],
-    [0, 1, 0, 0, 0, 1, 0],
-    [0, 0, 1, 1, 1, 0, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [0, MIN_CONTRIB, 0, 0, 0, MIN_CONTRIB, 0],
+    [0, 0, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0, 0],
 ]
 
 E = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 1, 0, 0, 1],
-    [1, 0, 0, 1, 0, 0, 1],
-    [1, 0, 0, 1, 0, 0, 1],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, 0, MIN_CONTRIB],
 ]
 
 F = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 1, 0, 0, 0],
-    [1, 0, 0, 1, 0, 0, 0],
-    [1, 0, 0, 1, 0, 0, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, 0, 0],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, 0, 0],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, 0, 0],
 ]
 
 G = [
-    [0, 1, 1, 1, 1, 1, 0],
-    [1, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 1, 0, 0, 1],
-    [0, 1, 0, 1, 1, 1, 0],
+    [0, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, 0, MIN_CONTRIB],
+    [0, MIN_CONTRIB, 0, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0],
 ]
 
 H = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0],
-    [1, 1, 1, 1, 1, 1, 1],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [0, 0, 0, MIN_CONTRIB, 0, 0, 0],
+    [0, 0, 0, MIN_CONTRIB, 0, 0, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
 ]
 
 I = [
-    [1, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 1],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, MIN_CONTRIB],
 ]
 
 J = [
-    [1, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, 0],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, 0],
 ]
 K = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 1, 0, 1, 0, 0],
-    [0, 1, 0, 0, 0, 1, 0],
-    [1, 0, 0, 0, 0, 0, 1],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [0, 0, MIN_CONTRIB, 0, MIN_CONTRIB, 0, 0],
+    [0, MIN_CONTRIB, 0, 0, 0, MIN_CONTRIB, 0],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, MIN_CONTRIB],
 ]
 L = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 0, 1],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [0, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [0, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [0, 0, 0, 0, 0, 0, MIN_CONTRIB],
 ]
 
 M = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [0, 1, 0, 0, 0, 0, 0],
-    [0, 0, 1, 1, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1, 1, 1],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [0, MIN_CONTRIB, 0, 0, 0, 0, 0],
+    [0, 0, MIN_CONTRIB, MIN_CONTRIB, 0, 0, 0],
+    [0, MIN_CONTRIB, 0, 0, 0, 0, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
 ]
 
 N = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0],
-    [1, 1, 1, 1, 1, 1, 1],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [0, 0, MIN_CONTRIB, 0, 0, 0, 0],
+    [0, 0, 0, MIN_CONTRIB, 0, 0, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
 ]
 
 O = [
-    [0, 1, 1, 1, 1, 1, 0],
-    [1, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 1],
-    [0, 1, 1, 1, 1, 1, 0],
+    [0, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [0, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0],
 ]
 
 P = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 1, 0, 0, 0],
-    [1, 0, 0, 1, 0, 0, 0],
-    [1, 1, 1, 1, 0, 0, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, 0, 0],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, 0, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0, 0, 0],
 ]
 
 Q = [
-    [0, 1, 1, 1, 1, 1, 0],
-    [1, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 1, 1],
-    [0, 1, 1, 1, 1, 1, 0],
+    [0, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, 0, 0, MIN_CONTRIB, MIN_CONTRIB],
+    [0, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0],
 ]
 
 R = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 1, 1, 0, 0],
-    [1, 0, 0, 1, 0, 1, 0],
-    [1, 1, 1, 1, 0, 0, 1],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, MIN_CONTRIB, 0, 0],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, MIN_CONTRIB, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0, 0, MIN_CONTRIB],
 ]
 
 S = [
-    [1, 1, 1, 1, 0, 0, 1],
-    [1, 0, 0, 1, 0, 0, 1],
-    [1, 0, 0, 1, 0, 0, 1],
-    [1, 0, 0, 1, 1, 1, 1],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
 ]
 
 T = [
-    [1, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, 0],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, 0],
+    [MIN_CONTRIB, 0, 0, 0, 0, 0, 0],
 ]
 
 U = [
-    [1, 1, 1, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0],
+    [0, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [0, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0],
 ]
 
 V = [
-    [1, 1, 1, 1, 1, 0, 0],
-    [0, 0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 1, 0],
-    [1, 1, 1, 1, 1, 0, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0, 0],
+    [0, 0, 0, 0, 0, MIN_CONTRIB, 0],
+    [0, 0, 0, 0, 0, 0, MIN_CONTRIB],
+    [0, 0, 0, 0, 0, MIN_CONTRIB, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, 0, 0],
 ]
 
 W = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 1, 1, 0, 0],
-    [0, 0, 0, 0, 0, 1, 0],
-    [1, 1, 1, 1, 1, 1, 1],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [0, 0, 0, 0, 0, MIN_CONTRIB, 0],
+    [0, 0, 0, MIN_CONTRIB, MIN_CONTRIB, 0, 0],
+    [0, 0, 0, 0, 0, MIN_CONTRIB, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
 ]
 X = [
-    [1, 1, 0, 0, 0, 1, 1],
-    [0, 0, 1, 0, 1, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 1, 0, 1, 0, 0],
-    [1, 1, 0, 0, 0, 1, 1],
+    [MIN_CONTRIB, MIN_CONTRIB, 0, 0, 0, MIN_CONTRIB, MIN_CONTRIB],
+    [0, 0, MIN_CONTRIB, 0, MIN_CONTRIB, 0, 0],
+    [0, 0, 0, MIN_CONTRIB, 0, 0, 0],
+    [0, 0, MIN_CONTRIB, 0, MIN_CONTRIB, 0, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, 0, 0, 0, MIN_CONTRIB, MIN_CONTRIB],
 ]
 Y = [
-    [1, 1, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 1, 1, 1, 1],
-    [0, 0, 1, 0, 0, 0, 0],
-    [1, 1, 0, 0, 0, 0, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, 0, 0, 0, 0, 0],
+    [0, 0, MIN_CONTRIB, 0, 0, 0, 0],
+    [0, 0, 0, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB, MIN_CONTRIB],
+    [0, 0, MIN_CONTRIB, 0, 0, 0, 0],
+    [MIN_CONTRIB, MIN_CONTRIB, 0, 0, 0, 0, 0],
 ]
 
 Z = [
-    [1, 0, 0, 0, 0, 1, 1],
-    [1, 0, 0, 0, 1, 0, 1],
-    [1, 0, 0, 1, 0, 0, 1],
-    [1, 0, 1, 0, 0, 0, 1],
-    [1, 1, 0, 0, 0, 0, 1],
+    [MIN_CONTRIB, 0, 0, 0, 0, MIN_CONTRIB, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, 0, MIN_CONTRIB, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, 0, MIN_CONTRIB, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, 0, MIN_CONTRIB, 0, 0, 0, MIN_CONTRIB],
+    [MIN_CONTRIB, MIN_CONTRIB, 0, 0, 0, 0, MIN_CONTRIB],
 ]
 
 SPACE = [[0, 0, 0, 0, 0, 0, 0]]
-
-MIN_CONTRIB = 10
+DOT = [[0, 0, 0, 0, 0, 0, MIN_CONTRIB]]
 
 
 def main(word):
     word_mat = generate_sparse_mat(word.upper())
-    print_mat(word_mat)
-    word_mat = word_mat * MIN_CONTRIB
     counter = 0
-    today = datetime.datetime(year=2022, month=1, day=2, hour=23, minute=2)
-    for row in word_mat.T:
+    # Change date to first pixel of contribution chart
+    for row in word_mat:
+        row_str = ""
         for val in row:
-            commit_date = today + datetime.timedelta(days=counter)
+            commit_date = FIRST_CONTRIB_DATE + datetime.timedelta(days=counter)
+            row_str = f"{row_str} {commit_date}---{val}"
             execute_cmd(f"""git commit --allow-empty -m "EMPTY COMMIT" --date="{commit_date}" """, val)
             counter = counter + 1
 
@@ -211,14 +213,14 @@ def execute_cmd(cmd, frequency):
 
 
 def generate_sparse_mat(word):
-    word_mat = np.array(globals()["SPACE"]).T
+    word_mat = globals()["SPACE"]
     for letter in word:
         if letter == " ":
-            word_mat = np.append(word_mat, np.array(globals()["SPACE"]).T, axis=1)
-            word_mat = np.append(word_mat, np.array(globals()["SPACE"]).T, axis=1)
+            word_mat = word_mat + globals()["SPACE"]
+            word_mat = word_mat + globals()["SPACE"]
         else:
-            word_mat = np.append(word_mat, np.array(globals()[letter]).T, axis=1)
-            word_mat = np.append(word_mat, np.array(globals()["SPACE"]).T, axis=1)
+            word_mat = word_mat + globals()[letter]
+            word_mat = word_mat + globals()["SPACE"]
     return word_mat
 
 
@@ -231,4 +233,4 @@ def print_mat(mat):
 
 
 if __name__ == '__main__':
-    main('Steven Mi')
+    main(TEXT)
